@@ -10,19 +10,19 @@ local decorator = decorator.decorator
 
 local 
 function wrap_timeit(action,number)
-	number = number or 1000000
-	return 
-	function(...)
-		print("[wrap_timeit]...",number)
-		local ret
-		local t = os.clock()
-		for i=1,number do
-			ret = action(...)
-		end
-		print("cost:",os.clock()-t)
-		print("number:",number)
-		return ret
-	end
+    number = number or 1000000
+    return 
+    function(...)
+        print("[wrap_timeit]...",number)
+        local ret
+        local t = os.clock()
+        for i=1,number do
+            ret = action(...)
+        end
+        print("cost:",os.clock()-t)
+        print("number:",number)
+        return ret
+    end
 end
 
 
@@ -30,7 +30,7 @@ end
 local max = 
     decorator(wrap_timeit) ..
     function (a,b)
-    	return math.max(a,b)
+        return math.max(a,b)
     end
 
 

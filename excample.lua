@@ -10,28 +10,28 @@ local decorator = decorator.decorator
 
 local 
 function wrap_test(action,info)
-	return 
-	function(...)
-		print("[wrap_test]...",info)
-		return action(...)
-	end
+    return 
+    function(...)
+        print("[wrap_test]...",info)
+        return action(...)
+    end
 end
 
 
 local 
 function wrap_test2(action)
-	return
-	function (...)
-		print("[wrap_test2]...",debug.getinfo(action,'S').source)
-		return action(...)
-	end
+    return
+    function (...)
+        print("[wrap_test2]...",debug.getinfo(action,'S').source)
+        return action(...)
+    end
 end
 
 local max = 
     decorator(wrap_test,'info:hello') ..
     decorator(wrap_test2) ..
     function (a,b)
-    	return math.max(a,b)
+        return math.max(a,b)
     end
 
 
