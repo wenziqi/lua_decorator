@@ -1,0 +1,48 @@
+-- @auth    rocky(wenshaoqi)
+-- @date    2020-12-03
+-- @ver     lua-5.3.2
+-- @mail    952623276@qq.com
+
+
+
+local decorator = require "decorator"
+local decorator = decorator.decorator
+
+local 
+function wrap_timeit(action,number)
+	number = number or 1000000
+	return 
+	function(...)
+		print("[wrap_timeit]...",number)
+		local ret
+		local t = os.clock()
+		for i=1,number do
+			ret = action(...)
+		end
+		print("cost:",os.clock()-t)
+		print("number:",number)
+		return ret
+	end
+end
+
+
+
+local max = 
+    decorator(wrap_timeit) ..
+    function (a,b)
+    	return math.max(a,b)
+    end
+
+
+
+local i = max(10,20)
+print(i)
+
+--[[
+$ lua excample2.lua
+[wrap_timeit]...        1000000
+cost:   0.366
+number: 1000000
+20
+
+]]--
